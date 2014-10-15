@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Jacob Newman
 # Created 12/26/2013
 
@@ -7,25 +8,29 @@ from pygame.locals import *
 
 ####### Constants ##########
 disc_diameter = 10
-number_of_discs = 7
+number_of_discs = 3
 #testing speeds = [1,-1]
 speeds = [-10,-9,-8,-7,-6,6,7,8,9,10]
 font_color = (0,0,0)
+one = 1000
+two = 2000
+three = 3000
+four = 4000
 ############################
 
 
 
 # Helper Functions
 def countdown():
-    if time > 60 and time < 120:
+    if time > one and time < two:
         myfont = pygame.font.SysFont("helvetica", 100)
         label = myfont.render("3", 1, font_color)
         screen.blit(label, (500, 250))
-    elif time >= 120 and time < 180:
+    elif time >= two and time < three:
         myfont = pygame.font.SysFont("helvetica", 100)
         label = myfont.render("2", 1, font_color)
         screen.blit(label, (500, 250))
-    elif time >= 180 and time < 260:
+    elif time >= three and time < four:
         myfont = pygame.font.SysFont("helvetica", 100)
         label = myfont.render("1", 1, font_color)
         screen.blit(label, (500, 250))
@@ -105,12 +110,12 @@ score = 0
 while True:
     #Limit the fps and count each frame
     clock.tick(60)
-    time += 1
+    time += clock.get_time()
     # Background
     screen.blit(background, (0,0))
     
     #Discs
-    if time >= 260 and disc_list != []:
+    if time >= four and disc_list != []:
         disc_list[0].position[0] += disc_list[0].xspeed
         disc_list[0].position[1] += disc_list[0].yspeed
         screen.blit(disc_list[0].image, (disc_list[0].position[0],disc_list[0].position[1]))
@@ -132,7 +137,7 @@ while True:
     if disc_list != []:
         countdown()
 
-    if disc_list == [] and time <= 240:
+    if disc_list == [] and time <= four:
             myfont = pygame.font.SysFont("helvetica", 100)
             label = myfont.render("Game Over", 1, font_color)
 
@@ -142,9 +147,9 @@ while True:
             screen.blit(score_label, (180, 340))
 
             
-            if time == 240:
-                pygame.quit()
-                sys.exit()
+    if disc_list == [] and time > four:
+            pygame.quit()
+            sys.exit()
 
     #Event controller
     for event in pygame.event.get():
@@ -152,7 +157,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if event.type == MOUSEBUTTONDOWN and time > 260:
+        if event.type == MOUSEBUTTONDOWN and time > four:
             x,y=event.pos
             x_diff = math.fabs(x - (disc_list[0].position[0]+55))
             y_diff = math.fabs(y - (disc_list[0].position[1]+55))
