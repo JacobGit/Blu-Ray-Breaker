@@ -10,7 +10,7 @@ from pygame.locals import *
 disc_diameter = 10
 number_of_discs = 3
 #testing speeds = [1,-1]
-speeds = [-10,-9,-8,-7,-6,6,7,8,9,10]
+speeds = [-12,-10,-8,-6,6,8,10,12]
 font_color = (0,0,0)
 one = 1000
 two = 2000
